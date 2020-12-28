@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 
-class Landing extends Component {
-    constructor() {
-        super()
-        this.state = {
-            users: [{ id: 1, name: 'user1', budget: 10, rentedMovies: [] }, { id: 2, name: 'user2', budget: 15, rentedMovies: [] },
-            { id: 3, name: 'user3', budget: 3, rentedMovies: [] },  { id: 3, name: 'user4', budget: 3, rentedMovies: [] }]
-        }
-    }
+const Landing = (props) => {
+    //u.id not math.random key needs to be in the link 
 
-    render() {
-        return (
-            <div class='users'>{this.state.users.map(u => {
-                return <Link className='user' to="/catalog"><div  key={Math.random()}> {u.name}</div></Link>
-            })}</div>
-        )
-    }
+    const updateUser = (userId) => props.updateUser(userId)
+
+    return (
+        <div class='users'>{props.users.map(u => {
+            return (
+                <Link className='user' onClick={() => updateUser(u.id)} key={u.id} to="/catalog">
+                    <div> {u.name}</div>
+                </Link>
+            )
+        })}</div>
+    )
+
 }
 
 export default Landing
